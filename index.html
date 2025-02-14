@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To do list</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <h2> To do list</h2>
+    <div class="container">
+      <form id="todo-form">
+        <input type="text" placeholder="Add new task" class="new-task" id="new-todo">
+        <button type="submit" class="submit-task-btn">Add</button>
+      </form>
+    </div>
+
+    <div class="container">
+      <div>
+        <button type="button" class="view-tasks-btn" id="view-tasks-btn">View tasks</button>
+        <button type="button" class="completed-btn" id="completed-btn">Completed tasks</button>
+        <button type="button" class="pending-tasks-btn" id="pending-tasks-btn">Pending tasks</button>
+        <button type="button" class="clear-all-btn" id="clear-btn">Clear all</button>
+      </div>
+      <ul id="taskList" class="list-items"></ul>
+    </div>
+  </body>
+</html>
