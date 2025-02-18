@@ -1,6 +1,5 @@
 // Manages collection of task items and performs CRUD operations on them 
 // Accesses database (JSON) to retrieve and update data as and when updated on View
-
 import TaskItem from "./TaskItem";
 
 interface AllTasks {
@@ -10,10 +9,11 @@ interface AllTasks {
     clearTask(): void;
     addTask(taskObj: TaskItem): void;
     removeTask(id: string): void;
-    editTask(id: string, updatedString: string): void;
+    editTask(id: string, updatedString: string, updatedNote: string, updatedDate: string): void;
     toggleTaskChange(id: string): void;
     getCompletedTask(): TaskItem[];
     getTaskToComplete(): TaskItem[];
+    getOverdueTask(): TaskItem[];
 }
 
 export default class TaskList implements AllTasks {
@@ -31,6 +31,8 @@ export default class TaskList implements AllTasks {
         const parsedTaskList: {
             _id: string,
             _task: string, 
+            _note: string, 
+            _date: string,
             _completed: boolean
         } [] = JSON.parse(storedTasks);
 
@@ -38,6 +40,8 @@ export default class TaskList implements AllTasks {
             const newTaskItem = new TaskItem (
                 obj._id,
                 obj._task,
+                obj._note,
+                obj._date,
                 obj._completed,
             );
 
@@ -69,12 +73,14 @@ export default class TaskList implements AllTasks {
     }
 
     // Modify the contents of an existing array of tasks 
-    editTask(id: string, updatedString: string): void {
+    editTask(id: string, updatedString: string, updatedNote: string, updatedDate: string): void {
         // if (updatedString.trim === "") return;
         
         const taskEdit = this._tasks.find((task) => task.id === id);
         if (!taskEdit) return;
         taskEdit.task = updatedString;
+        taskEdit.note = updatedNote;
+        taskEdit.date = updatedDate;
         this.save();
     }
 
@@ -96,5 +102,12 @@ export default class TaskList implements AllTasks {
     getTaskToComplete(): TaskItem[] {
         const completedTask = this._tasks.filter((task) => !task.completed);
         return completedTask; 
+    }
+
+    // If deadline has surpassed and task is not completed 
+    getOverdueTask(): TaskItem[] {
+        const currDate = new Date();
+        const overdueTask = this._tasks.filter((task) => new Date(task.date) < currDate && !task.completed);
+        return overdueTask;
     }
 }

@@ -8,13 +8,14 @@ interface Controller {
     getTaskList(): TaskItem[];
     addTask(newTask: TaskItem): void;
     deleteTask(taskId: string): void;
-    editTask(taskId: string, updatedTaskString: string): void;
+    editTask(taskId: string, updatedTaskString: string, updatedNote: string, updatedDate: string): void;
     loadTask(): void;
     clearTask(): void;
     saveTask(): void;
     toggleTask(taskId: string): void;
     getPendingTask(): TaskItem[];
     getCompletedTask(): TaskItem[];
+    getOverdueTask(): TaskItem[];
 }
 
 export default class TaskListController implements Controller {
@@ -40,8 +41,8 @@ export default class TaskListController implements Controller {
         this._taskList.clearTask();
     }
 
-    editTask(taskId: string, updatedTaskString: string): void {
-        this._taskList.editTask(taskId, updatedTaskString);
+    editTask(taskId: string, updatedTaskString: string, updatedNote: string, updatedDate: string): void {
+        this._taskList.editTask(taskId, updatedTaskString, updatedNote, updatedDate);
     }
 
     loadTask(): void {
@@ -64,5 +65,10 @@ export default class TaskListController implements Controller {
     getPendingTask(): TaskItem[] {
         const pendingTask = this._taskList.getTaskToComplete();
         return pendingTask;
+    }
+
+    getOverdueTask(): TaskItem[] {
+        const overdueTask = this._taskList.getOverdueTask();
+        return overdueTask;
     }
 }
