@@ -9,7 +9,7 @@ interface AllTasks {
     clearTask(): void;
     addTask(taskObj: TaskItem): void;
     removeTask(id: string): void;
-    editTask(id: string, updatedString: string, updatedNote: string, updatedDate: string): void;
+    editTask(id: string, updatedString: string, updatedNote: string, updatedProject: string, updatedDate: string): void;
     toggleTaskChange(id: string): void;
     getCompletedTask(): TaskItem[];
     getTaskToComplete(): TaskItem[];
@@ -32,7 +32,9 @@ export default class TaskList implements AllTasks {
             _id: string,
             _task: string, 
             _note: string, 
+            _project: string,
             _date: string,
+            //_time: string,
             _completed: boolean
         } [] = JSON.parse(storedTasks);
 
@@ -41,7 +43,9 @@ export default class TaskList implements AllTasks {
                 obj._id,
                 obj._task,
                 obj._note,
+                obj._project,
                 obj._date,
+                //obj._time, 
                 obj._completed,
             );
 
@@ -73,14 +77,16 @@ export default class TaskList implements AllTasks {
     }
 
     // Modify the contents of an existing array of tasks 
-    editTask(id: string, updatedString: string, updatedNote: string, updatedDate: string): void {
+    editTask(id: string, updatedString: string, updatedNote: string, updatedProject: string, updatedDate: string): void {
         // if (updatedString.trim === "") return;
         
         const taskEdit = this._tasks.find((task) => task.id === id);
         if (!taskEdit) return;
         taskEdit.task = updatedString;
         taskEdit.note = updatedNote;
+        taskEdit.project = updatedProject;
         taskEdit.date = updatedDate;
+        //taskEdit.time = updatedTime;
         this.save();
     }
 
@@ -104,6 +110,7 @@ export default class TaskList implements AllTasks {
         return completedTask; 
     }
 
+    //// CHECK TIME 
     // If deadline has surpassed and task is not completed 
     getOverdueTask(): TaskItem[] {
         const currDate = new Date();

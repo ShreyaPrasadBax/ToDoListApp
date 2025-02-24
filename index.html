@@ -4,38 +4,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer type="module" src="/src/main.ts"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
-  <body class="todo-app-container">
-    <div id="header-date-time">
-
-    </div>
-    <div class="todo-title">
-      <h2> To do list</h2>
-      <button type="button" class="add-new-task-btn" id="add-new-task-btn">+</button>
-    </div>
-
-    <div id="popup-background" class="container-popup"> 
-      <div id="popup">
-        <span id="close-popup">&times;</span>
-        <h3> Create new task</h3>
-        <form id="todo-form">
-          <input name="new-todo" type="text" placeholder="Add new task" class="form-control" id="new-todo" required>
-          <input name="new-note" type="text" placeholder="Add note" class="form-note" id="new-note" required>
-          <input name="new-date" type="date" placeholder="Enter deadline" class="form-date" id="new-date" required>
-          <button type="submit" class="btn-primary">Add</button>
-        </form>
+  <body id="body-id">
+    <div class="top-nav">
+      <h3 class="header-title">Planner</h3>
+      <div class="top-nav-right">
+        <label class="switch">
+          <input type="checkbox" id="checkboxTheme">
+          <span class="slider round"></span>
+        </label>        
+        <!--
+        <span class="profile-dot"></span>
+        <a class="profile-name">Username</a>
+        -->
       </div>
     </div>
-
-    <div class="container">
-      <div class="" role="group" >
+    <div class="left-sidenav">
+      <div class="left-sidenav-contents">
+        
+        <button class="dropdown-btn">PROJECTS
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+          <a href="#">Tasks</a>
+          <a href="#">Filler</a>
+        </div>
+        <button type="button" class="add-new-task-btn" id="add-new-task-btn">Add task</button>
+      </div>
+    </div>
+    <div class="right-sidenav">
+      <div class="right-sidenav-contents">
         <button type="button" class="view-tasks-btn" id="view-tasks-btn">View tasks</button>
         <button type="button" class="completed-btn" id="completed-btn">Completed tasks</button>
         <button type="button" class="pending-tasks-btn" id="pending-tasks-btn">Pending tasks</button>
         <button type="button" class="overdue-tasks-btn" id="overdue-tasks-btn">Overdue tasks</button>
         <button type="button" class="clear-all-btn" id="clear-all-btn">Clear all</button>
       </div>
-      <ul id="taskList" class="list-items"></ul>
     </div>
+    <div class="main">
+      <!--
+      <div class="task-box">
+        <p>Title</p>
+      </div>
+      -->
+      <div id="popup-background" class="popup-background"> 
+        <div id="popup" class="popup">
+          <span id="close-popup">&times;</span>
+          <h3> Create new task</h3>
+          <form id="todo-form" class="todo-form">
+            <input name="new-todo" type="text" placeholder="Add new task" class="form-control" id="new-todo" required>
+            <input name="new-note" type="text" placeholder="Add note" class="form-note" id="new-note" required>
+            <div class="todo-form-datetime">
+              <input name="new-project" type="text" placeholder="Add project" class="form-project" id="new-project">
+              <input name="new-date" type="date" placeholder="Enter deadline" class="form-date" id="new-date" required>
+            </div>
+            <div class="todo-form-datetime">
+              <!--<input name="new-time" type="time" placeholder="Enter deadline" class="form-time" id="new-time" required>-->
+            </div>
+            <button type="submit" class="btn-primary">Add</button>
+          </form>
+        </div>
+      </div>
+      <div class="tasklist-container">
+        <ul id="taskList" class="list-items"></ul>
+      </div>
+    </div>
+    
+    
+    
+    
   </body>
 </html>

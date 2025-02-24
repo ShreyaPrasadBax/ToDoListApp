@@ -8,7 +8,7 @@ interface Controller {
     getTaskList(): TaskItem[];
     addTask(newTask: TaskItem): void;
     deleteTask(taskId: string): void;
-    editTask(taskId: string, updatedTaskString: string, updatedNote: string, updatedDate: string): void;
+    editTask(taskId: string, updatedTaskString: string, updatedNote: string, updatedProject: string, updatedDate: string): void;
     loadTask(): void;
     clearTask(): void;
     saveTask(): void;
@@ -41,8 +41,8 @@ export default class TaskListController implements Controller {
         this._taskList.clearTask();
     }
 
-    editTask(taskId: string, updatedTaskString: string, updatedNote: string, updatedDate: string): void {
-        this._taskList.editTask(taskId, updatedTaskString, updatedNote, updatedDate);
+    editTask(taskId: string, updatedTaskString: string, updatedNote: string, updatedProject: string, updatedDate: string): void {
+        this._taskList.editTask(taskId, updatedTaskString, updatedNote, updatedProject, updatedDate);
     }
 
     loadTask(): void {
